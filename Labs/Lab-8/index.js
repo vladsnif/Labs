@@ -14,7 +14,7 @@ let secretKeyA = modPow(publicB, privateA, p);
 let secretKeyB = modPow(publicA, privateB, p);
 if (secretKeyA === secretKeyB)
 {
-    console.log("Обмін ключами успішний. Спільний секретний ключ: {0}", secretKeyA);
+    console.log("Обмін ключами успішний. Спільний секретний ключ:", secretKeyA);
 }
 else
 {
