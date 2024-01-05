@@ -1,5 +1,3 @@
-import {isPrime} from "./findPrimitive.js";
-
 export function textToBigInt(text) {
     const codeUnits = new Uint16Array(text.length);
     for (let i = 0; i < text.length; i++) {
@@ -51,16 +49,4 @@ export function modInverse(a, m) {
     } else {
         return x % m;
     }
-}
-export function getRandomBigInt(min, max) {
-    const range = max - min + 1n;
-    return (BigInt(Math.floor(Math.round(Math.random()) * Number(range))) + min);
-}
-export function generateLargePrime(bits) {
-    let n;
-    do {
-        n = getRandomBigInt(2n ** (bits - 1n), 2n ** bits - 1n);
-    } while (!isPrime(n));
-
-    return n;
 }

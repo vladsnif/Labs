@@ -1,22 +1,22 @@
-import {findPrimitive} from "./findPrimitive.js";
-import {generateKeys, generateLargePrime} from "./service.js";
-const p = generateLargePrime(4n);
-const g = findPrimitive(p);
+import {findPrimitiveRoot, generatePrime, getRandomBigInt, modPow} from "./service.js";
 
-console.log(`p = ${p.toString()}`);
-console.log(`g = ${g.toString()}`);
+let p = generatePrime(512);
 
-const aliceKeys = generateKeys(p, g);
-const bobKeys = generateKeys(p, g);
+let g = findPrimitiveRoot(p);
 
-console.log("\nAlpha: \n\tПриватний ключ: %s \n\tПублічний ключ: %s", aliceKeys[0].toString(), aliceKeys[1].toString());
-console.log("\nBeta: \n\tПриватний ключ: %s \n\tПублічний ключ: %s\n\n", bobKeys[0].toString(), bobKeys[1].toString());
+let privateA = getRandomBigInt(256);
+let privateB = getRandomBigInt(256);
 
-const aliceSharedSecret = modPow(bobKeys[1], aliceKeys[0], p);
-const bobSharedSecret = modPow(aliceKeys[1], bobKeys[0], p);
+let publicA = modPow(g, privateA, p);
+let publicB = modPow(g, privateB, p);
 
-if (aliceSharedSecret === bobSharedSecret) {
-    console.log("Обмін ключами успішний. Спільний секретний ключ: %s", aliceSharedSecret.toString());
-} else {
+let secretKeyA = modPow(publicB, privateA, p);
+let secretKeyB = modPow(publicA, privateB, p);
+if (secretKeyA === secretKeyB)
+{
+    console.log("Обмін ключами успішний. Спільний секретний ключ: {0}", secretKeyA);
+}
+else
+{
     console.log("Помилка в обміні ключами.");
 }

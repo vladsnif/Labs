@@ -1,8 +1,8 @@
-import {findPrimitive} from "./findPrimitive.js";
-import {bigIntToText, generateLargePrime, getRandomBigInt, modInverse, modPow, textToBigInt} from "./service.js";
+import {findPrimitiveRoot, generatePrime, getRandomBigInt} from "./findPrimitive.js";
+import {bigIntToText, modInverse, modPow, textToBigInt} from "./service.js";
 
-const p = generateLargePrime(512n);
-const g = findPrimitive(p);
+const p = generatePrime(512n);
+const g = findPrimitiveRoot(p);
 
 const x = getRandomBigInt(256);
 const y = modPow(g, x, p);

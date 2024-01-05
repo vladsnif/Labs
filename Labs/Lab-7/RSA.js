@@ -1,6 +1,6 @@
 import {modPow} from "./modPow.js";
 
-function egcd(a, b) {
+export function egcd(a, b) {
     if (a === 0n) {
         return [b, 0n, 1n];
     } else {
@@ -17,9 +17,13 @@ export function modInverse(a, m) {
         return x % m;
     }
 }
-export function rsaDecrypt(c, d, n) {
-    return modPow(c, d, n);
-}
+
+
 export function rsaEncrypt(m, e, n) {
     return modPow(m, e, n);
+}
+
+
+export function rsaDecrypt(c, d, n) {
+    return modPow(c, d, n);
 }
